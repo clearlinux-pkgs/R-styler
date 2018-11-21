@@ -1,8 +1,11 @@
-1.0.2
+1.1.0
+R-backports
+R-cli
+R-dplyr
 R-enc
 R-purrr
-R-rprojroot
-R-backports
 R-rematch2
+R-rprojroot
 R-tibble
-R-dplyr
+R-withr
+R-xfun
