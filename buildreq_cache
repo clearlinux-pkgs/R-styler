@@ -3,9 +3,12 @@ R-backports
 R-cli
 R-dplyr
 R-enc
+R-evaluate
 R-purrr
 R-rematch2
 R-rprojroot
+R-stringi
 R-tibble
+R-utf8
 R-withr
 R-xfun

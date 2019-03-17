@@ -4,34 +4,36 @@
 #
 Name     : R-styler
 Version  : 1.1.0
-Release  : 8
+Release  : 9
 URL      : https://cran.r-project.org/src/contrib/styler_1.1.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.1.0.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-backports
-Requires: R-cli
-Requires: R-dplyr
-Requires: R-purrr
-Requires: R-rematch2
-Requires: R-rprojroot
-Requires: R-tibble
-Requires: R-withr
-Requires: R-xfun
+Requires: R-evaluate
+Requires: R-stringi
+Requires: R-utf8
 BuildRequires : R-backports
 BuildRequires : R-cli
 BuildRequires : R-dplyr
+BuildRequires : R-enc
+BuildRequires : R-evaluate
 BuildRequires : R-purrr
 BuildRequires : R-rematch2
 BuildRequires : R-rprojroot
+BuildRequires : R-stringi
 BuildRequires : R-tibble
+BuildRequires : R-utf8
 BuildRequires : R-withr
 BuildRequires : R-xfun
 BuildRequires : buildreq-R
 
 %description
-user's formatting intent.
+# styler
+The goal of styler is to provide non-invasive pretty-printing of R
+source code while adhering to the
+[tidyverse](http://style.tidyverse.org) formatting rules. styler can be
+customized to format code according to other style guides too.
 
 %prep
 %setup -q -c -n styler
@@ -41,10 +43,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542842080
+export SOURCE_DATE_EPOCH=1552847201
 
 %install
-export SOURCE_DATE_EPOCH=1542842080
+export SOURCE_DATE_EPOCH=1552847201
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -80,8 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library styler|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  styler || :
 
 
 %files
@@ -118,3 +119,542 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/styler/html/00Index.html
 /usr/lib64/R/library/styler/html/R.css
 /usr/lib64/R/library/styler/rstudio/addins.dcf
+/usr/lib64/R/library/styler/tests/testthat.R
+/usr/lib64/R/library/styler/tests/testthat/exception_handling/empty_file.R
+/usr/lib64/R/library/styler/tests/testthat/exception_handling/parser-error.R
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/fun_dec_scope_spaces-in.R
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/fun_dec_scope_spaces-in_tree
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/fun_dec_scope_spaces-out.R
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/line_break_fun_dec-in.R
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/line_break_fun_dec-in_tree
+/usr/lib64/R/library/styler/tests/testthat/fun_dec/line_break_fun_dec-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_only-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_only-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_only-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_only-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_only-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_only-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_spacing-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_spacing-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_round_spacing-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_while_for_if_fun-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_while_for_if_fun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/multi_line_curly_while_for_if_fun-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/one_line_curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/one_line_curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_curly_brackets/one_line_curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/non_strict_calls-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/non_strict_calls-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/non_strict_calls-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/strict_calls-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/strict_calls-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_fun_calls/strict_calls-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_and_round-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_and_round-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_and_round-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_and_round_in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_only-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_only-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/curly_only-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_mixed-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_random-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_random-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/edge_strict_random-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/fun_for_new_line-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/fun_for_new_line-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/fun_for_new_line-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/if_else_curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/if_else_curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/if_else_curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/overall-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/overall-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/overall-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_closing_on_same_line-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_closing_on_same_line-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_closing_on_same_line-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_only-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_only-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_multiple/round_only-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/dollar_R6-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/dollar_R6-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/dollar_R6-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_assign-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_assign-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_assign-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formal_simple-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formal_simple-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formal_simple-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_tokens-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_tokens-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_formals_complex_tokens-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_tokens-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_tokens-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/eq_sub_complex_tokens-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/logical_special_eq_sub-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/logical_special_eq_sub-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/logical_special_eq_sub-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/multiply_divide-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/multiply_divide-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/multiply_divide-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/not_first_trigger-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/not_first_trigger-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/not_first_trigger-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/overall-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/overall-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/overall-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment_and_math-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment_and_math-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_and_assignment_and_math-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_simple-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_simple-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_simple-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_with_dot-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_with_dot-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/pipe_with_dot-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/plus_minus-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/plus_minus-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/plus_minus-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/while_for_if_without_curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/while_for_if_without_curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_operators/while_for_if_without_curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_no_start-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_no_start-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_no_start-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_start-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_start-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/arithmetic_start-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-no-indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-no-indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-no-indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-random-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-random-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line-random-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/multi_line_multi_expression.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-nested-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-nested-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-nested-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_round_brackets/one_line-out.R
+/usr/lib64/R/library/styler/tests/testthat/indention_square_brackets/square_brackets_line_break-in.R
+/usr/lib64/R/library/styler/tests/testthat/indention_square_brackets/square_brackets_line_break-in_tree
+/usr/lib64/R/library/styler/tests/testthat/indention_square_brackets/square_brackets_line_break-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_if_else_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/if_else_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/insertion_comment_interaction/just_if_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/comma-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/comma-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/comma-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/edge_comment_and_curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/edge_comment_and_curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/edge_comment_and_curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/if_with_line_break_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/if_with_line_break_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/if_with_line_break_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/pipe_and_comment-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/pipe_and_comment-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_and_other/pipe_and_comment-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/line_breaks_and_comments-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/line_breaks_and_comments-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/line_breaks_and_comments-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/named_arguments-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/named_arguments-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/named_arguments-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/switch_ifelse_etc_no_line_break-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/switch_ifelse_etc_no_line_break-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/switch_ifelse_etc_no_line_break-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_comments-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_comments-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_comments-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_complex_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_mixed-in_tree
+/usr/lib64/R/library/styler/tests/testthat/line_breaks_fun_call/token_dependent_mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/non_strict_math_spacing_all-in.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/non_strict_math_spacing_all-in_tree
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/non_strict_math_spacing_all-out.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_all-in.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_all-in_tree
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_all-out.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_all_but_power-in.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_all_but_power-in_tree
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_all_but_power-out.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_plus-in.R
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_plus-in_tree
+/usr/lib64/R/library/styler/tests/testthat/math_token_spacing/strict_math_spacing_zero_plus-out.R
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/three_complex_expr-in.R
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/three_complex_expr-in_tree
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/three_complex_expr-out.R
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/two_simple_expr-in.R
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/two_simple_expr-in_tree
+/usr/lib64/R/library/styler/tests/testthat/multiple_expressions/two_simple_expr-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/eol_eof_spaces-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/eol_eof_spaces-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/eol_eof_spaces-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/just_comments-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/just_comments-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/just_comments-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/mixed-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/rplumber-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/rplumber-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/rplumber-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_1-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_1-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_1-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_2-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_2-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/shebang_2-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/spacing_before-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/spacing_before-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/spinning_code_chunk_headers-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/spinning_code_chunk_headers-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/spinning_code_chunk_headers-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/with_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/with_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/with_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_with_force-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_with_force-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_with_force-out.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_without_force-in.R
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_without_force-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parse_comments/within_spacing_without_force-out.R
+/usr/lib64/R/library/styler/tests/testthat/parsing/long_strings-in.R
+/usr/lib64/R/library/styler/tests/testthat/parsing/long_strings-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parsing/long_strings-out.R
+/usr/lib64/R/library/styler/tests/testthat/parsing/repeated_parsing-in.R
+/usr/lib64/R/library/styler/tests/testthat/parsing/repeated_parsing-in_tree
+/usr/lib64/R/library/styler/tests/testthat/parsing/repeated_parsing-out.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyz-r-and-rmd-dir/random-non-script
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyz-r-and-rmd-dir/random-rmd-script.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyz-r-and-rmd-dir/random-script.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyz-r-and-rmd-dir/subdir/random-rmd-script-in-subdir.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyz-r-and-rmd-dir/subdir/random-script-in-sub-dir.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzaddin/addin_region-in.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzaddin/addin_region-out.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/clean-reference-with-scope-tokens
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/clean-sample-with-scope-tokens.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/dirty-reference-with-scope-spaces
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/dirty-reference-with-scope-tokens
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/dirty-sample-with-scope-spaces.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir-dirty/dirty-sample-with-scope-tokens.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir/random-non-script
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir/random-script.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzdir/subdir/random-script-in-sub-dir.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzemptydir/non_r_file
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile-rnw/random.Rnw
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile-rnw/random2.Rnw
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile-rnw/random3.Rnw
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile-rnw/random4.Rnw
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile/random-script.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile_rmd/random.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile_rmd/random2.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile_rmd/random3.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzfile_rmd/random4.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/DESCRIPTION
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/NAMESPACE
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/R/RcppExports.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/R/hello-world.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/README.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/src/RcppExports.cpp
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/src/timesTwo.cpp
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/tests/testthat.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/tests/testthat/test-package-xyz.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rmd/vignettes/random.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/DESCRIPTION
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/NAMESPACE
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/R/RcppExports.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/R/hello-world.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/README.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/src/RcppExports.cpp
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/src/timesTwo.cpp
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/tests/testthat.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/tests/testthat/test-package-xyz.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/vignettes/random.Rmd
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage-rnw/vignettes/random.Rnw
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage/DESCRIPTION
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage/NAMESPACE
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage/R/hello-world.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage/tests/testthat.R
+/usr/lib64/R/library/styler/tests/testthat/public-api/xyzpackage/tests/testthat/test-package-xyz.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_line_breaks-in.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_line_breaks-in_tree
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_line_breaks-out.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_tokens-in.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_tokens-in_tree
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_ifelse_scope_tokens-out.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_eq_only-in.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_eq_only-in_tree
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_eq_only-out.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_mixed-in_tree
+/usr/lib64/R/library/styler/tests/testthat/relocate_eq_assign/eq_assign_multiple_tokens_mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/rmd/r_and_non_r_code_chunks-in.Rmd
+/usr/lib64/R/library/styler/tests/testthat/rmd/r_and_non_r_code_chunks-out.Rmd
+/usr/lib64/R/library/styler/tests/testthat/rmd/simple-in.Rmd
+/usr/lib64/R/library/styler/tests/testthat/rmd/simple-out.Rmd
+/usr/lib64/R/library/styler/tests/testthat/rnw/008-outdec-in.Rnw
+/usr/lib64/R/library/styler/tests/testthat/rnw/008-outdec-out.Rnw
+/usr/lib64/R/library/styler/tests/testthat/rnw/011-conditional-eval-in.Rnw
+/usr/lib64/R/library/styler/tests/testthat/rnw/011-conditional-eval-out.Rnw
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/1-one-function-example-last-proper-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/1-one-function-example-last-proper-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/1-one-function-example-last-proper-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/10-styler-r-ui-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/10-styler-r-ui-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/10-styler-r-ui-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/11-start-with-dontrun-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/11-start-with-dontrun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/11-start-with-dontrun-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-dontshow-dontrun-donttest-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-dontshow-dontrun-donttest-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-dontshow-dontrun-donttest-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-fun-decs-in-examples-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-fun-decs-in-examples-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/12-fun-decs-in-examples-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/13-empty-lines-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/13-empty-lines-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/13-empty-lines-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/14-pipe-dontrun-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/14-pipe-dontrun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/14-pipe-dontrun-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/2-one-function-examples-last-proper-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/2-one-function-examples-last-proper-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/2-one-function-examples-last-proper-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/3-one-function-example-not-last-proper-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/3-one-function-example-not-last-proper-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/3-one-function-example-not-last-proper-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/4-one-function-examples-not-last-proper-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/4-one-function-examples-not-last-proper-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/4-one-function-examples-not-last-proper-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/5-multiple-function-examples-last-proper-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/5-multiple-function-examples-last-proper-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/5-multiple-function-examples-last-proper-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/6-multiple-function-examples-no-last-run-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/6-multiple-function-examples-no-last-run-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/6-multiple-function-examples-no-last-run-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/7-roxygen-no-dontrun-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/7-roxygen-no-dontrun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/7-roxygen-no-dontrun-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/8-roxygen-dontrun-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/8-roxygen-dontrun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/8-roxygen-dontrun-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/9-styler-r-ui-style-string-multiple-in.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/9-styler-r-ui-style-string-multiple-in_tree
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-complete/9-styler-r-ui-style-string-multiple-out.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/1-one-function-example-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/2-one-function-examples-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/3-one-function-example-not-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/4-one-function-examples-not-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/5-multiple-function-examples-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/roxygen-examples-identify/6-multiple-function-examples-not-last-proper-run.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_line_breaks-in.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_line_breaks-in_tree
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_line_breaks-out.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_none-in.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_none-in_tree
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_none-out.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_spaces-in.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_spaces-in_tree
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_spaces-out.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_tokens-in.R
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_tokens-in_tree
+/usr/lib64/R/library/styler/tests/testthat/scope_argument/scope_tokens-out.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/correct-in.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/correct-in_tree
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/correct-out.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-another-in_file-in.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-another-in_file-in_tree
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-another-in_file-out.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-in.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-in_tree
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k2-out.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k3-in.R
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k3-in_tree
+/usr/lib64/R/library/styler/tests/testthat/serialize_tests/k3-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/bang_bang_spacing-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/bang_bang_spacing-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/bang_bang_spacing-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/colons-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/colons-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/colons-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/comments-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/comments-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/comments-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/round_curly-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/round_curly-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/round_curly-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing-tilde-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing-tilde-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing-tilde-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma2-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma2-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_comma2-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_function-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_function-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_function-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_if-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_if-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_if-out.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_in-in.R
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_in-in_tree
+/usr/lib64/R/library/styler/tests/testthat/spacing/spacing_in-out.R
+/usr/lib64/R/library/styler/tests/testthat/start_line/comment-in.R
+/usr/lib64/R/library/styler/tests/testthat/start_line/comment-in_tree
+/usr/lib64/R/library/styler/tests/testthat/start_line/comment-out.R
+/usr/lib64/R/library/styler/tests/testthat/start_line/no_comment-in.R
+/usr/lib64/R/library/styler/tests/testthat/start_line/no_comment-in_tree
+/usr/lib64/R/library/styler/tests/testthat/start_line/no_comment-out.R
+/usr/lib64/R/library/styler/tests/testthat/strict/eof-in.R
+/usr/lib64/R/library/styler/tests/testthat/strict/eof-in_tree
+/usr/lib64/R/library/styler/tests/testthat/strict/eof-out.R
+/usr/lib64/R/library/styler/tests/testthat/strict/eol-in.R
+/usr/lib64/R/library/styler/tests/testthat/strict/eol-in_tree
+/usr/lib64/R/library/styler/tests/testthat/strict/eol-out.R
+/usr/lib64/R/library/styler/tests/testthat/strict/non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/strict/non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/strict/non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/strict/out-relaxed-target.R
+/usr/lib64/R/library/styler/tests/testthat/strict/out-target.R
+/usr/lib64/R/library/styler/tests/testthat/strict/strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/strict/strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/strict/strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/test-create_token.R
+/usr/lib64/R/library/styler/tests/testthat/test-create_tree.R
+/usr/lib64/R/library/styler/tests/testthat/test-encoding.R
+/usr/lib64/R/library/styler/tests/testthat/test-exception_handling.R
+/usr/lib64/R/library/styler/tests/testthat/test-fun_dec.R
+/usr/lib64/R/library/styler/tests/testthat/test-helpers.R
+/usr/lib64/R/library/styler/tests/testthat/test-identify-roxygen-examples.R
+/usr/lib64/R/library/styler/tests/testthat/test-indention_curly.R
+/usr/lib64/R/library/styler/tests/testthat/test-indention_fun_calls.R
+/usr/lib64/R/library/styler/tests/testthat/test-indention_multiple.R
+/usr/lib64/R/library/styler/tests/testthat/test-indention_operators.R
+/usr/lib64/R/library/styler/tests/testthat/test-indention_round_brackets.R
+/usr/lib64/R/library/styler/tests/testthat/test-insertion_comment_interaction.R
+/usr/lib64/R/library/styler/tests/testthat/test-line_breaks_and_other.R
+/usr/lib64/R/library/styler/tests/testthat/test-line_breaks_fun_call.R
+/usr/lib64/R/library/styler/tests/testthat/test-math_token_spacing.R
+/usr/lib64/R/library/styler/tests/testthat/test-multiple_expressions.R
+/usr/lib64/R/library/styler/tests/testthat/test-parse_comments.R
+/usr/lib64/R/library/styler/tests/testthat/test-parsing.R
+/usr/lib64/R/library/styler/tests/testthat/test-public_api.R
+/usr/lib64/R/library/styler/tests/testthat/test-relocate_eq_assign.R
+/usr/lib64/R/library/styler/tests/testthat/test-rmd.R
+/usr/lib64/R/library/styler/tests/testthat/test-rnw.R
+/usr/lib64/R/library/styler/tests/testthat/test-roundtrip.R
+/usr/lib64/R/library/styler/tests/testthat/test-roxygen-examples-complete.R
+/usr/lib64/R/library/styler/tests/testthat/test-scope_argument.R
+/usr/lib64/R/library/styler/tests/testthat/test-serialize_tests.R
+/usr/lib64/R/library/styler/tests/testthat/test-spacing.R
+/usr/lib64/R/library/styler/tests/testthat/test-square_brackets.R
+/usr/lib64/R/library/styler/tests/testthat/test-start_line.R
+/usr/lib64/R/library/styler/tests/testthat/test-strict.R
+/usr/lib64/R/library/styler/tests/testthat/test-tidyeval.R
+/usr/lib64/R/library/styler/tests/testthat/test-token_adding_removing.R
+/usr/lib64/R/library/styler/tests/testthat/test-unary.R
+/usr/lib64/R/library/styler/tests/testthat/test-unindention.R
+/usr/lib64/R/library/styler/tests/testthat/test-unindention_regex.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/bang_bang-in.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/bang_bang-in_tree
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/bang_bang-out.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/eq_sub_and_comma-in.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/eq_sub_and_comma-in_tree
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/eq_sub_and_comma-out.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/setting_var_names-in.R
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/setting_var_names-in_tree
+/usr/lib64/R/library/styler/tests/testthat/tidyeval/setting_var_names-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/add_brackets_in_pipe-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/add_brackets_in_pipe-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/add_brackets_in_pipe-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/double_braces-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/double_braces-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/double_braces-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if-else-comma-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if-else-comma-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if-else-comma-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_non_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_non_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_non_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_strict-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_strict-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/if_else_strict-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/mixed_token-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/mixed_token-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/mixed_token-out.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/token_creation_find_pos-in.R
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/token_creation_find_pos-in_tree
+/usr/lib64/R/library/styler/tests/testthat/token_adding_removing/token_creation_find_pos-out.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_complex-in.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_complex-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_complex-out.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_simple-in.R
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_simple-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unary_spacing/unary_simple-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/mixed-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/mixed-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention/mixed-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/unindent_multi_line-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/unindent_multi_line-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention/unindent_multi_line-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/vec_with_fun-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention/vec_with_fun-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention/vec_with_fun-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/random_non_comment_indention-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/random_non_comment_indention-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/random_non_comment_indention-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_no_pattern-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_no_pattern-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_no_pattern-out.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_with_pattern-in.R
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_with_pattern-in_tree
+/usr/lib64/R/library/styler/tests/testthat/unindention_regex/regex_force_with_pattern-out.R
