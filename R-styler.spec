@@ -4,17 +4,23 @@
 #
 Name     : R-styler
 Version  : 1.1.0
-Release  : 11
+Release  : 12
 URL      : https://cran.r-project.org/src/contrib/styler_1.1.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.1.0.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
 Group    : Development/Tools
 License  : GPL-3.0
+Requires: R-Rcpp
+Requires: R-fansi
+Requires: R-pillar
+BuildRequires : R-Rcpp
 BuildRequires : R-backports
 BuildRequires : R-cli
 BuildRequires : R-dplyr
 BuildRequires : R-enc
 BuildRequires : R-evaluate
+BuildRequires : R-fansi
+BuildRequires : R-pillar
 BuildRequires : R-purrr
 BuildRequires : R-rematch2
 BuildRequires : R-rprojroot
@@ -40,10 +46,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552858813
+export SOURCE_DATE_EPOCH=1552933318
 
 %install
-export SOURCE_DATE_EPOCH=1552858813
+export SOURCE_DATE_EPOCH=1552933318
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "

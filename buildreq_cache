@@ -1,9 +1,12 @@
 1.1.0
+R-Rcpp
 R-backports
 R-cli
 R-dplyr
 R-enc
 R-evaluate
+R-fansi
+R-pillar
 R-purrr
 R-rematch2
 R-rprojroot
