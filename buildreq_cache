@@ -1,4 +1,4 @@
-1.1.0
+1.1.1
 R-Rcpp
 R-backports
 R-cli
@@ -7,11 +7,13 @@ R-enc
 R-evaluate
 R-fansi
 R-pillar
+R-pkgconfig
 R-purrr
 R-rematch2
 R-rprojroot
 R-stringi
 R-tibble
+R-tidyselect
 R-utf8
 R-withr
 R-xfun
