@@ -4,50 +4,36 @@
 #
 Name     : R-styler
 Version  : 1.1.1
-Release  : 15
+Release  : 16
 URL      : https://cran.r-project.org/src/contrib/styler_1.1.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.1.1.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-Rcpp
-Requires: R-dplyr
-Requires: R-fansi
-Requires: R-pillar
-Requires: R-pkgconfig
+Requires: R-backports
+Requires: R-cli
+Requires: R-magrittr
 Requires: R-purrr
 Requires: R-rematch2
+Requires: R-rlang
 Requires: R-rprojroot
 Requires: R-tibble
-Requires: R-tidyselect
-Requires: R-utf8
+Requires: R-withr
 Requires: R-xfun
-BuildRequires : R-Rcpp
-BuildRequires : R-dplyr
-BuildRequires : R-fansi
-BuildRequires : R-pillar
-BuildRequires : R-pkgconfig
+BuildRequires : R-backports
+BuildRequires : R-cli
+BuildRequires : R-magrittr
 BuildRequires : R-purrr
 BuildRequires : R-rematch2
+BuildRequires : R-rlang
 BuildRequires : R-rprojroot
 BuildRequires : R-tibble
-BuildRequires : R-tidyselect
-BuildRequires : R-utf8
+BuildRequires : R-withr
 BuildRequires : R-xfun
 BuildRequires : buildreq-R
 
 %description
-# styler
-<!-- badges
-[![Build
-Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/r-lib/styler)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/styler)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
-[![cran
-version](http://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
--->
+formatting intent.
 
 %prep
 %setup -q -c -n styler
@@ -56,13 +42,13 @@ version](http://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557195008
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562214276
 
 %install
-export SOURCE_DATE_EPOCH=1557195008
+export SOURCE_DATE_EPOCH=1562214276
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -91,7 +77,7 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
