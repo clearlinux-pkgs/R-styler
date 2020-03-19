@@ -4,7 +4,7 @@
 #
 Name     : R-styler
 Version  : 1.3.2
-Release  : 22
+Release  : 23
 URL      : https://cran.r-project.org/src/contrib/styler_1.3.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.3.2.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
