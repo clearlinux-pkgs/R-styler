@@ -4,7 +4,7 @@
 #
 Name     : R-styler
 Version  : 1.3.2
-Release  : 23
+Release  : 24
 URL      : https://cran.r-project.org/src/contrib/styler_1.3.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.3.2.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
@@ -13,7 +13,7 @@ License  : GPL-3.0
 Requires: R-R.cache
 Requires: R-backports
 Requires: R-cli
-Requires: R-here
+Requires: R-dplyr
 Requires: R-magrittr
 Requires: R-purrr
 Requires: R-rematch2
@@ -25,7 +25,7 @@ Requires: R-xfun
 BuildRequires : R-R.cache
 BuildRequires : R-backports
 BuildRequires : R-cli
-BuildRequires : R-here
+BuildRequires : R-dplyr
 BuildRequires : R-magrittr
 BuildRequires : R-purrr
 BuildRequires : R-rematch2
@@ -37,33 +37,26 @@ BuildRequires : R-xfun
 BuildRequires : buildreq-R
 
 %description
-# styler
-[![Build
-Status](https://travis-ci.org/r-lib/styler.svg?branch=master)](https://travis-ci.org/r-lib/styler)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/r-lib/styler?branch=master&svg=true)](https://ci.appveyor.com/project/r-lib/styler)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![codecov](https://codecov.io/gh/r-lib/styler/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/styler)
-[![cran
-version](https://www.r-pkg.org/badges/version/styler)](https://cran.r-project.org/package=styler)
+formatting intent.
 
 %prep
 %setup -q -c -n styler
+cd %{_builddir}/styler
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583527481
+export SOURCE_DATE_EPOCH=1589771657
 
 %install
-export SOURCE_DATE_EPOCH=1583527481
+export SOURCE_DATE_EPOCH=1589771657
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
