@@ -4,7 +4,7 @@
 #
 Name     : R-styler
 Version  : 1.4.1
-Release  : 28
+Release  : 29
 URL      : https://cran.r-project.org/src/contrib/styler_1.4.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.4.1.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
@@ -13,8 +13,6 @@ License  : MIT
 Requires: R-R.cache
 Requires: R-backports
 Requires: R-cli
-Requires: R-dplyr
-Requires: R-here
 Requires: R-magrittr
 Requires: R-purrr
 Requires: R-rematch2
@@ -46,14 +44,20 @@ intent.
 cd %{_builddir}/styler
 
 %build
+## build_prepend content
+old=/usr/local/bin/Rscript
+new=/usr/bin/Rscript
+target=./styler/inst/hooks/require-news-update.R
+sed -i "s|$old|$new|" $target
+## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1617218608
+export SOURCE_DATE_EPOCH=1617226259
 
 %install
-export SOURCE_DATE_EPOCH=1617218608
+export SOURCE_DATE_EPOCH=1617226259
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "

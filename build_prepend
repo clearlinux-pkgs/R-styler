@@ -1,0 +1,4 @@
+old=/usr/local/bin/Rscript
+new=/usr/bin/Rscript
+target=./styler/inst/hooks/require-news-update.R
+sed -i "s|$old|$new|" $target
