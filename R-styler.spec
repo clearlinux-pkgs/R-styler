@@ -4,7 +4,7 @@
 #
 Name     : R-styler
 Version  : 1.9.1
-Release  : 52
+Release  : 53
 URL      : https://cran.r-project.org/src/contrib/styler_1.9.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/styler_1.9.1.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
@@ -27,9 +27,6 @@ BuildRequires : R-rprojroot
 BuildRequires : R-vctrs
 BuildRequires : R-withr
 BuildRequires : buildreq-R
-# Suppress stripping binaries
-%define __strip /bin/true
-%define debug_package %{nil}
 
 %description
 intent.
@@ -43,10 +40,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1678122475
+export SOURCE_DATE_EPOCH=1678830770
 
 %install
-export SOURCE_DATE_EPOCH=1678122475
+export SOURCE_DATE_EPOCH=1678830770
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
