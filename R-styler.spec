@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-styler
-Version  : 1.10.0
-Release  : 56
-URL      : https://cran.r-project.org/src/contrib/styler_1.10.0.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/styler_1.10.0.tar.gz
+Version  : 1.10.1
+Release  : 57
+URL      : https://cran.r-project.org/src/contrib/styler_1.10.1.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/styler_1.10.1.tar.gz
 Summary  : Non-Invasive Pretty Printing of R Code
 Group    : Development/Tools
 License  : MIT
@@ -43,10 +43,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685648205
+export SOURCE_DATE_EPOCH=1686066326
 
 %install
-export SOURCE_DATE_EPOCH=1685648205
+export SOURCE_DATE_EPOCH=1686066326
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -660,6 +660,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/styler/tests/testthat/stylerignore/crossing-with-expressions-out.R
 /usr/lib64/R/library/styler/tests/testthat/stylerignore/simple-in.R
 /usr/lib64/R/library/styler/tests/testthat/stylerignore/simple-out.R
+/usr/lib64/R/library/styler/tests/testthat/test-cache-clean-up.R
 /usr/lib64/R/library/styler/tests/testthat/test-cache-high-level-api.R
 /usr/lib64/R/library/styler/tests/testthat/test-cache-interaction-base-indention.R
 /usr/lib64/R/library/styler/tests/testthat/test-cache-interaction-more-specs.R
